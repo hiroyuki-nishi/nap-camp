@@ -1,7 +1,25 @@
-# ビルド方法
+# AWSにデプロイする方法
+
+## 1. JavaのコードからJarファイルを作成する方法
 ```
 mvn clean install
 ```
+
+## 2.SAMでbuildする方法
+```
+sam build
+```
+
+## 3.SAMでデプロイする方法
+```
+# 初回
+sam deploy --guided
+# 2回目以降
+sam deploy --guided
+```
+
+
+
 
 # デプロイ方法
 ```

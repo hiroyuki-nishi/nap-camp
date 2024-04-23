@@ -5,7 +5,7 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./target/SampleJava-1.0-SNAPSHOT.jar
+      CodeUri: HelloWorldFunction
       Handler: example.Handler::handleRequest
       Runtime: java11
       Architectures:
