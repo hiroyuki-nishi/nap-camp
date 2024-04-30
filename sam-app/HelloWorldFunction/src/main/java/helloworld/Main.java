@@ -14,6 +14,8 @@ import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.PutItemResponse;
 import software.amazon.awssdk.services.dynamodb.model.ResourceNotFoundException;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.sql.Connection;
@@ -21,6 +23,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.*;
 
 public class Main {
   public static void listS3Buckets(S3Client s3) {
@@ -95,16 +98,20 @@ public class Main {
     }
   }
 
-  private static void connectSQL() {
+  private static void connectSQL(String targetArea) {
     // NOTE: "jdbc:postgresql://localhost:5432/your_database_name";
     try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/admin", "admin", "admin123")) {
       if (conn != null) {
         System.out.println("Connected to the PostgreSQL database!");
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM public.menu");
+        // Prepare SQL statement with placeholder for areas
+        String sqlString = "SELECT * FROM campgrounds WHERE area = '" + targetArea + "'";
+        ResultSet rs = stmt.executeQuery(sqlString);
+
         while (rs.next()) {
-          System.out.println("shopId: " + rs.getInt("shop_id") + " manuName: " + rs.getString("menu_name"));
+          System.out.println("name: " + rs.getString("name") + " area: " + rs.getString("area"));
         }
+
         rs.close();
         stmt.close();
       }
@@ -135,7 +142,7 @@ public class Main {
 
   public static void main(String[] args) {
     try {
-      connectSQL();
+      connectSQL("海");
 //            testAWS();
     } catch (Exception e) {
       e.printStackTrace();
