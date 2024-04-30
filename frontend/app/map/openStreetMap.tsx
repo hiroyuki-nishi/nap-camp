@@ -19,7 +19,7 @@ const OpenStreetMap = () => {
     <MapContainer
       center={defaultLatLng}
       zoom={13}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%" }}
     >
       <TileLayer
