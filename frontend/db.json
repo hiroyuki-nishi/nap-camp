@@ -1,0 +1,14 @@
+{
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" },
+  "camp": [
+    { "id": 1, "name": "滋賀キャンプ場", "tel": "080222222", "adress": "aaaaaaaaa" },
+    { "id": 2, "name": "Aキャンプ場", "tel": "080222222", "adress": "aaaaaaaaa" },
+    { "id": 3, "name": "キャンプ滋賀場", "tel": "080222222", "adress": "aaaaaaaaa" }
+  ]
+}
