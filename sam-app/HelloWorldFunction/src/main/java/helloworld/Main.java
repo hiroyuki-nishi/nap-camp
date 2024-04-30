@@ -98,9 +98,9 @@ public class Main {
     }
   }
 
-  private static void connectSQL(String targetArea) {
+  private static void connectSQL(Connection conn, String targetArea) {
     // NOTE: "jdbc:postgresql://localhost:5432/your_database_name";
-    try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/admin", "admin", "admin123")) {
+    try {
       if (conn != null) {
         System.out.println("Connected to the PostgreSQL database!");
         Statement stmt = conn.createStatement();
@@ -112,6 +112,20 @@ public class Main {
           System.out.println("name: " + rs.getString("name") + " area: " + rs.getString("area"));
         }
 
+        rs.close();
+        stmt.close();
+      }
+
+    } catch (SQLException e) {
+      System.out.println("Connection failure: " + e.getMessage());
+    }
+  }
+
+  private static void addCamp(Connection conn, String campName, String area) {
+    try {
+      if (conn != null) {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = conn.createStatement().executeQuery("INSERT INTO campgrounds (name, area) VALUES ('" + campName + "','" + area + "')");
         rs.close();
         stmt.close();
       }
@@ -142,7 +156,11 @@ public class Main {
 
   public static void main(String[] args) {
     try {
-      connectSQL("海");
+      Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/admin", "admin", "admin123");
+      String area = "海";
+      addCamp(conn, "九十九湾園地キャンプ場", area);
+      connectSQL(conn, area);
+      conn.close();
 //            testAWS();
     } catch (Exception e) {
       e.printStackTrace();
