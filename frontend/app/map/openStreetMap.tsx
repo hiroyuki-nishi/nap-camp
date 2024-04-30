@@ -12,7 +12,7 @@ L.Icon.Default.mergeOptions({
 });
 import "leaflet/dist/leaflet.css";
 
-const OpenStreetMap = () => {
+const Map = () => {
   const defaultLatLng: LatLngTuple = [34.686, 135.520];
 
   return (
@@ -35,4 +35,4 @@ const OpenStreetMap = () => {
   );
 };
 
-export default OpenStreetMap;
+export default Map;

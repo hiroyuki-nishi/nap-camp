@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
+import {Box, Divider, Grid, Paper, styled} from "@mui/material";
 // import { OpenStreetMap } from "./map/openStreetMap";
 
 export default function Home() {
@@ -29,15 +30,11 @@ export default function Home() {
   ];
 
   const BACKGROUND_COLOR = "orange"
-  const createMenues = (types: string[], backgroundColor: string) => 
-    faciltyTypes.map((x, index) =>
-      <>
-        <div key={index} style={{ display: 'flex', backgroundColor: backgroundColor }}>
-          <input type="checkbox" />
-          <div>{x}</div>
-        </div>
-      </>
-    )
+  const SideMenu = (props: any) =>
+    <div style={{ display: 'flex' }}>
+      <input type="checkbox" />
+      <div>{props.label}</div>
+    </div>
 
   const Map = React.useMemo(
     () =>
@@ -47,10 +44,23 @@ export default function Home() {
       }),
     []
   );
+
   return (
     <>
-      {/*{ createMenues(faciltyTypes, BACKGROUND_COLOR) }*/}
-      <Map />
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item={true} xs={3}>
+            施設タイプ
+            {  faciltyTypes.map((x, index) => <SideMenu key={index} label={x}/>) }
+            <Divider />
+            ロケーション
+            {  locationTypes.map((x, index) => <SideMenu key={index} label={x}/>) }
+          </Grid>
+          <Grid item={true} xs={9}>
+            <Map />
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }
