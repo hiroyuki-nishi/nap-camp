@@ -28,7 +28,7 @@ const OpenStreetMap = () => {
       />
       <Marker position={defaultLatLng}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          ここは大阪中心だよ！
         </Popup>
       </Marker>
     </MapContainer>
