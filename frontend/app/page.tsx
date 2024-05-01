@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-import {Box, Divider, Grid, Paper, styled} from "@mui/material";
+import {Box, Divider, Grid} from "@mui/material";
 // import { OpenStreetMap } from "./map/openStreetMap";
 
 export default function Home() {
@@ -49,6 +49,11 @@ export default function Home() {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
+          <Grid item={true} xs={12}>
+            <div className="bg-emerald-500 p-2">
+              <input className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="キーワード" />
+            </div>
+          </Grid>
           <Grid item={true} xs={3}>
             施設タイプ
             {  faciltyTypes.map((x, index) => <SideMenu key={index} label={x}/>) }
