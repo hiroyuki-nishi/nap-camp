@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-import {Box, Divider, Grid, Paper, styled} from "@mui/material";
+import {Box, Divider, Grid} from "@mui/material";
 // import { OpenStreetMap } from "./map/openStreetMap";
 
 export default function Home() {
-  const faciltyTypes = [
+  const facilityTypes = [
     "ロッジ・ログハウス・コテージ",
     "バンガロー",
     "キャビン （ケビン）",
@@ -29,7 +29,6 @@ export default function Home() {
     "公園",
   ];
 
-  const BACKGROUND_COLOR = "orange"
   const SideMenu = (props: any) =>
     <div style={{ display: 'flex' }}>
       <input type="checkbox" />
@@ -45,13 +44,27 @@ export default function Home() {
     []
   );
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing || e.key !== 'Enter') return
+    console.log("Enter")
+    // TODO: APIを呼び出す
+  }
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
+          <Grid item={true} xs={12}>
+            <div className="bg-emerald-500 p-2">
+              <input
+                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="キーワード"
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+          </Grid>
           <Grid item={true} xs={3}>
             施設タイプ
-            {  faciltyTypes.map((x, index) => <SideMenu key={index} label={x}/>) }
+            {  facilityTypes.map((x, index) => <SideMenu key={index} label={x}/>) }
             <Divider />
             ロケーション
             {  locationTypes.map((x, index) => <SideMenu key={index} label={x}/>) }
